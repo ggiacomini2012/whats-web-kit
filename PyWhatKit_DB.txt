@@ -1,0 +1,65 @@
+Date: 16/4/2025
+Time: 15:32
+Phone Number: +5547997676797
+Message: Hello Guilherme! This is a test message.
+--------------------
+Date: 16/4/2025
+Time: 15:40
+Phone Number: +5547997676797
+Message: Hello Guilherme! This is a test message.
+--------------------
+Date: 16/4/2025
+Time: 15:43
+Phone Number: +5547997676797
+Message: Hello Guilherme! This is a test message.
+--------------------
+Date: 16/4/2025
+Time: 15:44
+Phone Number: +5547984717861
+Message: Hello Vi! This is a test message.
+--------------------
+Date: 16/4/2025
+Time: 16:12
+Phone Number: +5547997676797
+Message: Hello Guilherme! This is a test message.
+--------------------
+Date: 16/4/2025
+Time: 16:13
+Phone Number: +5547984717861
+Message: Hello Vi! This is a test message.
+--------------------
+Date: 16/4/2025
+Time: 16:13
+Phone Number: +5547999107334
+Message: Hello brina! This is a test message.
+--------------------
+Date: 16/4/2025
+Time: 16:14
+Phone Number: +5547997676797
+Message: Hello Guilherme! This is a test message.
+--------------------
+Date: 16/4/2025
+Time: 16:15
+Phone Number: +5547984717861
+Message: Hello Vi! This is a test message.
+--------------------
+Date: 16/4/2025
+Time: 16:15
+Phone Number: +5547999107334
+Message: Hello brina! This is a test message.
+--------------------
+Date: 16/4/2025
+Time: 16:38
+Phone Number: +5547997676797
+Message: Hello Guilherme! É uma piada!
+--------------------
+Date: 16/4/2025
+Time: 16:39
+Phone Number: +5547984717861
+Message: Hello Vi! É uma piada!
+--------------------
+Date: 16/4/2025
+Time: 16:39
+Phone Number: +5547999107334
+Message: Hello brina! É uma piada!
+--------------------
