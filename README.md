@@ -62,24 +62,38 @@ Siga as instruções na interface para carregar o arquivo `contacts.csv`, escrev
 
 Para instruções detalhadas sobre como gerar um executável standalone (Windows), consulte o arquivo `SETUP_GUIDE.md`.
 
+Para gerar o executável diretamente usando PyInstaller (certifique-se de ter as dependências instaladas e estar no ambiente virtual), você pode usar o seguinte comando no terminal a partir da raiz do projeto:
+
+```bash
+pyinstaller --windowed --icon="icon2.ico" --add-data="icon2.png;." --clean --add-data="bot.py;." gui.py
+```
+
+*   `--windowed`: Esconde a janela do terminal ao executar o app.
+*   `--icon="icon2.ico"`: Define o ícone do arquivo `.exe`.
+*   `--add-data="<arquivo>;."`: Inclui arquivos adicionais (como imagens ou outros scripts) necessários para a aplicação.
+*   `--clean`: Limpa o cache e arquivos de build anteriores antes de começar.
+*   `gui.py`: O script principal da sua aplicação.
+
+O executável será gerado na pasta `dist/gui`.
+
+## Limpeza / Desinstalação
+
+Para remover os arquivos e pastas gerados pelo processo de build e pela execução do bot (como `dist`, `build`, `bot.log`, `contact_log.json` e o ambiente virtual `.venv`), você pode usar os scripts de limpeza fornecidos. **Atenção:** Estes scripts NÃO apagam os arquivos de código fonte (`gui.py`, `bot.py`, etc.).
+
+*   **Windows:**
+    Execute o arquivo `uninstall.bat` com um duplo clique. Ele pedirá confirmação antes de remover os arquivos.
+
+*   **macOS / Linux:**
+    Execute o arquivo `uninstall.sh` a partir do seu terminal. Pode ser necessário dar permissão de execução ao script primeiro:
+    ```bash
+    chmod +x uninstall.sh
+    ```
+    Depois, execute-o:
+    ```bash
+    ./uninstall.sh
+    ```
+    O script também pedirá confirmação.
+
 ## Estrutura do Projeto
 
 ```
-/whats-web-kit
-|-- gui.py             # Script principal da interface gráfica
-|-- bot.py             # Lógica principal do bot (envio de mensagens)
-|-- requirements.txt   # Lista de dependências Python
-|-- contacts.csv       # Arquivo de contatos (precisa ser criado)
-|-- icon2.png          # Ícone usado pela GUI
-|-- icon2.ico          # Ícone para o executável (Windows)
-|-- SETUP_GUIDE.md     # Guia detalhado de setup e build
-|-- README.md          # Este arquivo
-|-- .venv/             # Ambiente virtual (se criado)
-|-- dist/              # Pasta de saída do build (se gerado)
-|-- build/             # Pasta temporária do build (se gerado)
-... (outros arquivos/pastas)
-```
-
-## Licença
-
-(Adicione aqui informações sobre a licença, se houver)
