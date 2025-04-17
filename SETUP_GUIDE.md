@@ -66,11 +66,12 @@ This process uses PyInstaller to bundle the application and its dependencies int
 1.  **Ensure Prerequisites:** Make sure `icon.ico` is present in the project root directory.
 2.  **Run PyInstaller:** Execute the following command in your terminal (with the virtual environment activated):
     ```bash
-    pyinstaller --windowed --icon="icon2.ico" --add-data="icon2.png;." --add-data="bot.py;." gui.py
+    pyinstaller --windowed --icon="icon2.ico" --add-data="icon2.png;." --clean --add-data="bot.py;." gui.py
     ```
     *   `--windowed`: Creates a GUI application without a console window.
     *   `--icon="icon2.ico"`: Sets the executable's icon.
     *   `--add-data="icon2.png;."`: Bundles the `icon2.png` needed by the GUI.
+    *   `--clean`: Cleans PyInstaller cache and removes temporary build files before starting the build.
     *   `--add-data="bot.py;."`: Bundles the `bot.py` script.
     *   `gui.py`: Specifies the main script.
 
