@@ -63,3 +63,13 @@ Time: 16:39
 Phone Number: +5547999107334
 Message: Hello brina! É uma piada!
 --------------------
+Date: 17/4/2025
+Time: 21:52
+Phone Number: +5547997676797
+Message: Hello Guilherme! This is a test message.
+--------------------
+Date: 17/4/2025
+Time: 21:54
+Phone Number: +5547997676797
+Message: Hello Guilherme! This is a test message.
+--------------------

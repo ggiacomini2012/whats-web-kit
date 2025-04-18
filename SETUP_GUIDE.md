@@ -66,19 +66,66 @@ This process uses PyInstaller to bundle the application and its dependencies int
 1.  **Ensure Prerequisites:** Make sure `icon.ico` is present in the project root directory.
 2.  **Run PyInstaller:** Execute the following command in your terminal (with the virtual environment activated):
     ```bash
-    pyinstaller --windowed --icon="icon2.ico" --add-data="icon2.png;." --clean --add-data="bot.py;." gui.py
+    pyinstaller --windowed --icon="icon.ico" --add-data="icon.png;." --clean --add-data="bot.py;." gui.py
     ```
     *   `--windowed`: Creates a GUI application without a console window.
-    *   `--icon="icon2.ico"`: Sets the executable's icon.
-    *   `--add-data="icon2.png;."`: Bundles the `icon2.png` needed by the GUI.
+    *   `--icon="icon.ico"`: Sets the executable's icon.
+    *   `--add-data="icon.png;."`: Bundles the `icon.png` needed by the GUI.
     *   `--clean`: Cleans PyInstaller cache and removes temporary build files before starting the build.
     *   `--add-data="bot.py;."`: Bundles the `bot.py` script.
     *   `gui.py`: Specifies the main script.
 
 3.  **Output:** PyInstaller will create a `build` folder and a `dist` folder. Your application will be inside `dist/gui`.
 
+## Building the Executable (macOS)
+
+This process uses PyInstaller to bundle the application and its dependencies into a distributable macOS application bundle.
+
+1.  **Ensure Prerequisites:**
+    *   Make sure you have an `icon.icns` file in the project root directory. You might need to convert your `icon.png` file to the `.icns` format using online tools or macOS utilities.
+    *   Ensure `icon.png` and `bot.py` are also present in the project root directory.
+2.  **Run PyInstaller:** Execute the following command in your terminal (with the virtual environment activated):
+    ```bash
+    pyinstaller --windowed --icon="icon.icns" --add-data="icon.png:." --clean --add-data="bot.py:." gui.py
+    ```
+    *   `--windowed`: Creates a GUI application without a console window (standard for macOS apps).
+    *   `--icon="icon.icns"`: Sets the application bundle's icon.
+    *   `--add-data="icon.png:."`: Bundles the `icon.png` needed by the GUI. Note the `:` separator used on macOS/Linux.
+    *   `--clean`: Cleans PyInstaller cache and removes temporary build files before starting the build.
+    *   `--add-data="bot.py:."`: Bundles the `bot.py` script. Note the `:` separator.
+    *   `gui.py`: Specifies the main script.
+
+3.  **Output:** PyInstaller will create a `build` folder and a `dist` folder. Your application bundle will be inside `dist/gui` (e.g., `dist/gui/gui.app`).
+
 ## Running the Built Executable
 
 1.  Navigate to the `dist/gui` folder.
 2.  Double-click `gui.exe` to run the application.
-3.  You can create a shortcut to this `gui.exe` file and place it on your Desktop for easier access (Right-click `gui.exe` -> Send to -> Desktop (create shortcut)). **Do not** move the `dist/gui` folder after creating the shortcut. 
+3.  You can create a shortcut to this `gui.exe` file and place it on your Desktop for easier access (Right-click `gui.exe` -> Send to -> Desktop (create shortcut)). **Do not** move the `dist/gui` folder after creating the shortcut.
+
+## Uninstalling the Application
+
+If you wish to remove the application and its related components, you can use the provided uninstall scripts. These scripts aim to remove the built application, the virtual environment, and other generated files.
+
+**Important:** Close the application and deactivate the virtual environment (if active, type `deactivate` in the terminal) before running the uninstall script.
+
+1.  **Open Terminal:** Open a terminal or command prompt in the project's root directory (`whats-web-kit`).
+
+2.  **Run the appropriate script:**
+
+    *   **Windows:**
+        ```cmd
+        uninstall.bat
+        ```
+
+    *   **macOS / Linux:**
+        *   First, make the script executable (you only need to do this once):
+          ```bash
+          chmod +x uninstall.sh
+          ```
+        *   Then, run the script:
+          ```bash
+          ./uninstall.sh
+          ```
+
+3.  **Manual Cleanup (Optional):** The scripts attempt to remove most components. You might want to manually delete the entire project folder (`whats-web-kit`) if you no longer need the source code or any remaining configuration files. 
