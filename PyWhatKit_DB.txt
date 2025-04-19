@@ -73,3 +73,8 @@ Time: 21:54
 Phone Number: +5547997676797
 Message: Hello Guilherme! This is a test message.
 --------------------
+Date: 18/4/2025
+Time: 20:54
+Phone Number: +5547997676797
+Message: Test message from bundled app test.
+--------------------

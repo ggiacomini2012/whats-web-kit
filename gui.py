@@ -6,6 +6,7 @@ import bot  # Import the bot logic
 import time
 import pyautogui
 import os # Import os module to construct path
+import sys # Add sys import at the top
 
 class App(ctk.CTk):
     def __init__(self):
@@ -14,22 +15,29 @@ class App(ctk.CTk):
         self.title("WhatsApp Bot")
         self.geometry("600x650")
 
-        # --- Set Window Icon ---
-        # Construct the absolute path to the icon file
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        icon_path = os.path.join(script_dir, "icon.png")
-        
-        if os.path.exists(icon_path):
-            try:
-                # Use Tkinter's PhotoImage to load the PNG
+        # --- Set Window Icon (PyInstaller compatible) ---
+        try:
+            # Determine base path whether running as script or bundled app
+            if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+                # Running in a PyInstaller bundle
+                base_path = sys._MEIPASS
+            else:
+                # Running as a normal Python script
+                base_path = os.path.dirname(os.path.abspath(__file__))
+
+            icon_path = os.path.join(base_path, "icon.png")
+
+            if os.path.exists(icon_path):
                 icon_image = tk.PhotoImage(file=icon_path)
-                # Set the icon for the main window
-                self.iconphoto(False, icon_image) 
-            except tk.TclError as e:
-                print(f"Error loading icon '{icon_path}': {e}. Make sure it's a valid PNG file.")
-        else:
-             print(f"Warning: Icon file not found at '{icon_path}'.")
-        # -----------------------
+                self.iconphoto(False, icon_image)
+                print(f"Icon loaded successfully from: {icon_path}") # Added for debugging
+            else:
+                 print(f"Warning: Icon file not found at '{icon_path}'. Looked in base path: {base_path}")
+        except tk.TclError as e:
+            print(f"Error loading icon '{icon_path}': {e}. Make sure it's a valid PNG file.")
+        except Exception as e:
+             print(f"An unexpected error occurred during icon loading: {e}") # Catch other potential errors
+        # ----------------------------------------------
 
         ctk.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
         ctk.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"

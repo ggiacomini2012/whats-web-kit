@@ -60,21 +60,47 @@ Siga as instruções na interface para carregar o arquivo `contacts.csv`, escrev
 
 ## Build (Opcional)
 
-Para instruções detalhadas sobre como gerar um executável standalone (Windows), consulte o arquivo `SETUP_GUIDE.md`.
+Você pode criar um executável standalone (um aplicativo `.app` no macOS ou `.exe` no Windows) para que o bot possa ser executado sem precisar instalar Python ou dependências manualmente em outra máquina.
 
-Para gerar o executável diretamente usando PyInstaller (certifique-se de ter as dependências instaladas e estar no ambiente virtual), você pode usar o seguinte comando no terminal a partir da raiz do projeto:
+**Pré-requisitos para Build:**
+
+*   Ter seguido os passos de **Instalação**, incluindo a instalação do `pyinstaller`.
+*   Para o ícone do aplicativo no **macOS**: Você precisará converter o arquivo `icon.png` para o formato `.icns` (Apple Icon Image). Você pode usar conversores online (procure por "png to icns converter mac") ou ferramentas como `iconutil` do macOS. Salve o arquivo resultante como `icon.icns` na raiz do projeto.
+*   Para o ícone do aplicativo no **Windows**: Você precisará de um arquivo `.ico`. Se não tiver um, pode converter `icon.png` para `.ico` usando conversores online.
+
+**Comandos de Build:**
+
+Execute o comando apropriado para seu sistema operacional no terminal, a partir da pasta raiz do projeto (com o ambiente virtual ativado):
+
+**macOS:**
 
 ```bash
-pyinstaller --windowed --icon="icon2.ico" --add-data="icon2.png;." --clean --add-data="bot.py;." gui.py
+pyinstaller --windowed --name gui --icon="icon.icns" --add-data="icon.png:." --noconfirm gui.py
 ```
 
-*   `--windowed`: Esconde a janela do terminal ao executar o app.
-*   `--icon="icon2.ico"`: Define o ícone do arquivo `.exe`.
-*   `--add-data="<arquivo>;."`: Inclui arquivos adicionais (como imagens ou outros scripts) necessários para a aplicação.
-*   `--clean`: Limpa o cache e arquivos de build anteriores antes de começar.
-*   `gui.py`: O script principal da sua aplicação.
+*   `--windowed`: Roda o aplicativo sem uma janela de terminal visível.
+*   `--name gui`: Define o nome do aplicativo resultante (`gui.app`).
+*   `--icon="icon.icns"`: Define o ícone que aparecerá no Finder para `gui.app`. **Requer o arquivo `icon.icns`**.
+*   `--add-data="icon.png:."`: Inclui o arquivo `icon.png` dentro do bundle. Isso é necessário para que o código possa carregar a imagem para o ícone da *janela* do aplicativo em tempo de execução.
+*   `--noconfirm`: Pula as confirmações de sobrescrever pastas `dist` e `build`.
+*   `gui.py`: O script principal da aplicação.
 
-O executável será gerado na pasta `dist/gui`.
+O aplicativo (`gui.app`) será gerado na pasta `dist/`.
+
+**Windows:**
+
+```bash
+pyinstaller --windowed --name gui --icon="icon.ico" --add-data="icon.png;." --noconfirm gui.py
+```
+
+*   `--windowed`: Roda o aplicativo sem uma janela de terminal visível.
+*   `--name gui`: Define o nome do executável resultante (`gui.exe`).
+*   `--icon="icon.ico"`: Define o ícone do arquivo `.exe`. **Requer um arquivo `icon.ico`**.
+*   `--add-data="icon.png;."`: Inclui o arquivo `icon.png` junto ao executável. O separador `:` (macOS/Linux) é trocado por `;` no Windows.
+*   `--noconfirm`: Pula as confirmações.
+*   `gui.py`: O script principal da aplicação.
+
+O executável (`gui.exe`) e seus arquivos de suporte serão gerados na pasta `dist/gui/`.
 
 ## Limpeza / Desinstalação
 

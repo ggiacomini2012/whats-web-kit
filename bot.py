@@ -5,13 +5,36 @@ import logging
 from datetime import datetime
 import json
 import os
+import sys # Import sys
 
-# Configure basic logging
-logging.basicConfig(level=logging.INFO, 
+# --- Define Log Path --- 
+def get_log_directory():
+    """Returns the path to the application's log directory."""
+    app_name = "WhatsAppBot" # Or use a more specific name if desired
+    if sys.platform == 'darwin': # macOS
+        base_dir = os.path.expanduser('~/Library/Application Support')
+    elif sys.platform == 'win32': # Windows
+        base_dir = os.getenv('APPDATA') or os.path.expanduser('~')
+    else: # Linux/Other
+        base_dir = os.path.expanduser('~/.local/share') # Common practice
+        if not os.path.exists(base_dir):
+             base_dir = os.path.expanduser('~/.config') # Fallback
+        if not os.path.exists(base_dir):
+             base_dir = os.path.expanduser('~') # Last resort
+             
+    log_dir = os.path.join(base_dir, app_name)
+    os.makedirs(log_dir, exist_ok=True) # Ensure the directory exists
+    return log_dir
+
+LOG_DIRECTORY = get_log_directory()
+BOT_LOG_FILE = os.path.join(LOG_DIRECTORY, "bot.log")
+JSON_LOG_FILE = os.path.join(LOG_DIRECTORY, "contact_log.json")
+# -----------------------
+
+# Configure basic logging using the defined path
+logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s',
-                    handlers=[logging.FileHandler("bot.log"), logging.StreamHandler()])
-
-JSON_LOG_FILE = "contact_log.json"
+                    handlers=[logging.FileHandler(BOT_LOG_FILE), logging.StreamHandler()])
 
 def log_message_to_json(phone_number, name, message):
     """Logs the sent message to a JSON file, indexed by phone number."""

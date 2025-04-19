@@ -66,42 +66,42 @@ This process uses PyInstaller to bundle the application and its dependencies int
 1.  **Ensure Prerequisites:** Make sure `icon.ico` is present in the project root directory.
 2.  **Run PyInstaller:** Execute the following command in your terminal (with the virtual environment activated):
     ```bash
-    pyinstaller --windowed --icon="icon.ico" --add-data="icon.png;." --clean --add-data="bot.py;." gui.py
+    pyinstaller --windowed --name gui --icon="icon.ico" --add-data="icon.png;." --noconfirm gui.py
     ```
     *   `--windowed`: Creates a GUI application without a console window.
-    *   `--icon="icon.ico"`: Sets the executable's icon.
-    *   `--add-data="icon.png;."`: Bundles the `icon.png` needed by the GUI.
-    *   `--clean`: Cleans PyInstaller cache and removes temporary build files before starting the build.
-    *   `--add-data="bot.py;."`: Bundles the `bot.py` script.
+    *   `--name gui`: Define o nome do executável resultante (`gui.exe`).
+    *   `--icon="icon.ico"`: Sets the executable's icon. **Requer um arquivo `icon.ico`**.
+    *   `--add-data="icon.png;."`: Bundles the `icon.png` needed by the GUI. Note the `;` separator used on Windows.
+    *   `--noconfirm`: Pula as confirmações de sobrescrever pastas `dist` e `build`.
     *   `gui.py`: Specifies the main script.
 
-3.  **Output:** PyInstaller will create a `build` folder and a `dist` folder. Your application will be inside `dist/gui`.
+3.  **Output:** PyInstaller will create a `build` folder and a `dist` folder. Your application will be inside `dist/gui/`.
 
 ## Building the Executable (macOS)
 
-This process uses PyInstaller to bundle the application and its dependencies into a distributable macOS application bundle.
+This process uses PyInstaller to bundle the application and its dependencies into a distributable macOS application bundle (`.app`).
 
 1.  **Ensure Prerequisites:**
-    *   Make sure you have an `icon.icns` file in the project root directory. You might need to convert your `icon.png` file to the `.icns` format using online tools or macOS utilities.
-    *   Ensure `icon.png` and `bot.py` are also present in the project root directory.
+    *   Make sure you have an `icon.icns` file in the project root directory. You might need to convert your `icon.png` file to the `.icns` format using online tools or macOS utilities like `iconutil`.
+    *   Ensure `icon.png` is also present in the project root directory (for the window icon).
 2.  **Run PyInstaller:** Execute the following command in your terminal (with the virtual environment activated):
     ```bash
-    pyinstaller --windowed --icon="icon.icns" --add-data="icon.png:." --clean --add-data="bot.py:." gui.py
+    pyinstaller --windowed --name gui --icon="icon.icns" --add-data="icon.png:." --noconfirm gui.py
     ```
-    *   `--windowed`: Creates a GUI application without a console window (standard for macOS apps).
-    *   `--icon="icon.icns"`: Sets the application bundle's icon.
-    *   `--add-data="icon.png:."`: Bundles the `icon.png` needed by the GUI. Note the `:` separator used on macOS/Linux.
-    *   `--clean`: Cleans PyInstaller cache and removes temporary build files before starting the build.
-    *   `--add-data="bot.py:."`: Bundles the `bot.py` script. Note the `:` separator.
+    *   `--windowed`: Creates a standard macOS GUI application bundle.
+    *   `--name gui`: Define o nome do aplicativo resultante (`gui.app`).
+    *   `--icon="icon.icns"`: Sets the application bundle's icon (shown in Finder). **Requer o arquivo `icon.icns`**.
+    *   `--add-data="icon.png:."`: Bundles the `icon.png` needed by the GUI code to set the window's title bar icon. Note the `:` separator used on macOS/Linux.
+    *   `--noconfirm`: Pula as confirmações de sobrescrever pastas `dist` e `build`.
     *   `gui.py`: Specifies the main script.
 
-3.  **Output:** PyInstaller will create a `build` folder and a `dist` folder. Your application bundle will be inside `dist/gui` (e.g., `dist/gui/gui.app`).
+3.  **Output:** PyInstaller will create a `build` folder and a `dist` folder. Your application bundle (`gui.app`) will be inside the `dist/` folder.
 
 ## Running the Built Executable
 
-1.  Navigate to the `dist/gui` folder.
-2.  Double-click `gui.exe` to run the application.
-3.  You can create a shortcut to this `gui.exe` file and place it on your Desktop for easier access (Right-click `gui.exe` -> Send to -> Desktop (create shortcut)). **Do not** move the `dist/gui` folder after creating the shortcut.
+1.  Navigate to the `dist/` folder (macOS) or `dist/gui/` folder (Windows).
+2.  Double-click `gui.app` (macOS) or `gui.exe` (Windows) to run the application.
+3.  You can drag `gui.app` to your Applications folder on macOS, or create a shortcut to `gui.exe` on Windows for easier access.
 
 ## Uninstalling the Application
 
